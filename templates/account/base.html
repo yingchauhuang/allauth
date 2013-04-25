@@ -1,0 +1,97 @@
+{% load cms_tags menu_tags sekizai_tags %}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}themes/blackandwhite/static/css/style.css" title="style" />
+  <title>{{ request.current_page.get_title }}</title>
+  {% render_block "css" %}
+</head>
+
+<body>
+{% cms_toolbar %}
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          {% placeholder "header" or %}
+          
+          <h1><a href="index.html">國泰金融集團</a></h1>
+          <h2>國泰綜合證券.</h2>
+          {% endplaceholder %}
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          {% show_menu 0 100 0 0 %}
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div class="sidebar">
+        {% placeholder "sidebar" or %}
+        <!-- insert your sidebar items here -->
+        <h3>最新消息</h3>
+        <h4>【 法令】個人資料保護法應告知投資人事項</h4>
+        <h5> 2013/04/16 </h5>
+        <p>本公司依據個人資料保護法（以下稱個資法）第8條規定，向您等告知下列事項，您倘依法應置法定代理人/輔助人/或其他具有代表權限之人者，依個資法施行細則第27條規定；本公司有與各代表人為必要之接觸、磋商或聯繫行為等.<br /><a href="#">Read more</a></p>
+        <p></p>
+        <h4>【平台】國泰樹精靈iPhone 版獨家新聞推播服務</h4>
+        <h5> 2013/04/15</h5>
+        <p>國泰樹精靈iPhone App,嶄新操作平台,最簡單輕鬆的方式讓您隨時隨地掌握台股走勢,第一時間取得重要財經新聞,<br /><a href="http://www.cathaysec.com.tw/newPhone/">即刻前往 國泰樹精靈APP專區</a></p>
+        <h3>有用連結</h3>
+        <ul>
+          <li><a href="http://www.cathaysec.com.tw/lobby.html">國泰交易大廳</a></li>
+          <li><a href="http://www.cathaysec.com.tw/service.asp">客服中心</a></li>
+          <li><a href="https://service01.cathaysec.com.tw/cathay1Web/index.jsp?Source=6">預約開戶</a></li>
+          <li><a href="http://www.cathaysec.com.tw/locate.asp">全省服務據點</a></li>
+        </ul>
+        <h3>Search</h3>
+        <form method="post" action="#" id="search_form">
+          <p>
+            <input class="search" type="text" name="search_field" value="Enter keywords....." />
+            <input name="search" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="{{ STATIC_URL }}themes/blackandwhite/static/images/search.png" alt="Search" title="Search" />
+          </p>
+        </form>
+        {% endplaceholder %}
+      </div>
+      <div class="content" id="top">
+        {% placeholder "content-top" or %}
+		{% block content %}
+			<ul>
+			{% if user.is_authenticated %}
+			<li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+			<li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+			{% else %}
+			<li><a href="{% url 'account_login' %}">Sign In</a></li>
+			<li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+			{% endif %}
+			</ul>
+		{% endblock %}
+        {% endplaceholder %}
+      </div>
+      <div class="content" id="left">
+        {% placeholder "content-left" or %}
+        {% endplaceholder %}
+      </div>
+      <div class="content" id="right">
+        {% placeholder "content-right" or %}
+        {% endplaceholder %}
+      </div>
+      <div class="content" id="bottom">
+        {% placeholder "content-bottom" or %}        
+        {% endplaceholder %}
+      </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; {{ request.get_host }} | <a href="http://validator.w3.org/check?uri=referer">HTML5</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.html5webtemplates.co.uk">design from HTML5webtemplates.co.uk</a>
+    </div>
+  </div>
+{% render_block "js" %}
+</body>
+</html>
